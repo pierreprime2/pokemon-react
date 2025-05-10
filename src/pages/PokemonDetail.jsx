@@ -1,15 +1,73 @@
 import { Typography, Box, Chip, Table, TableHead, TableRow, TableCell, TableBody } from '@mui/material'
 import { typeColors } from '../utils/typeColors'
+import IconButton from '@mui/material/IconButton';
+import AddIcon from '@mui/icons-material/Add'
 
-function PokemonDetail({ pokemon, spriteIndex }) {
+function PokemonDetail({ pokemon, spriteIndex, onAddToTeam, isInTeam }) {
     return (
-        <Box p={3}>
-            <Typography variant="h4" gutterBottom>{pokemon.english_name} (#{spriteIndex + 1})</Typography>
-            <img
-                src={`/src/assets/sprites/${spriteIndex + 1}.png`}
-                alt={pokemon.english_name}
-                width="300"
-            />
+      <>
+      <Box
+  sx={{
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'flex-start',
+    gap: 4,
+    flexWrap: 'nowrap', // ensure side-by-side
+    mb: 3
+  }}
+>
+  <Box>
+    <h1>{pokemon.english_name}</h1>
+    <img
+      src={`/src/assets/sprites/${spriteIndex + 1}.png`}
+      alt={pokemon.english_name}
+      width="300"
+      height="300"
+      style={{ imageRendering: 'pixelated' }}
+    />
+  </Box>
+
+  <Box>
+    {Array.from({ length: 4 }).map((_, i) => (
+      <Box
+        key={i}
+        sx={{
+          width: '160px',
+          height: '40px',
+          backgroundColor: '#355E3B',
+          color: 'white',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          borderRadius: '8px',
+          mb: 1
+        }}
+      >
+        Empty Slot
+      </Box>
+    ))}
+  </Box>
+</Box>
+
+            <Box mt={2}>
+              <IconButton
+                color="success"
+                onClick={onAddToTeam}
+                disabled={isInTeam}
+                sx={{
+                  backgroundColor: '#355E3B',
+                  color: 'white',
+                  padding: '8px 16px',
+                  fontSize: '1rem',
+                  borderRadius: 2
+                }}
+              >
+                <AddIcon sx={{ mr: 1 }} />
+                Add to team
+              </IconButton>
+              {isInTeam && <Typography variant="caption" ml={1}>Already in team</Typography>}
+            </Box>
 
             <Typography variant="h6" mt={2}>Types</Typography>
             <Box mb={2}>
@@ -107,7 +165,7 @@ function PokemonDetail({ pokemon, spriteIndex }) {
 
             <Typography variant="h6">Evolution</Typography>
             <Typography>{pokemon.evolution_relation} ({pokemon.evolution_count} related)</Typography>
-        </Box>
+        </>
     )
 }
 

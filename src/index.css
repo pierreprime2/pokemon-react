@@ -1,5 +1,12 @@
+@font-face {
+  font-family: 'PokemonEmerald';
+  src: url('/fonts/pokemon-emerald.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'PokemonEmerald', system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
